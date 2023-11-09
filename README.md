@@ -31,17 +31,27 @@ the [yadm.io][website-link] website.
 
 `yadm` is great, it works very well to manage dotfiles, but the initial setup on a new machine is somewhat cumbersome.
 
-This fork adds a install script that can be used to install `yadm` and then clone your dotfiles from a remote repo. No `root` needed, the install script should be easy to verify as safe, and there is a confirmation prompt before anything that could cause problems. The only requirements are `bash`, `git` and `curl`. A symbolic link to [`yadm`](yadm) will be created in `~/bin` if it exists, or in `~/.local/bin` otherwise, as well as a symbolic link to [`yadm.1`](yadm.md) file will be created in `~/.local/share/man/man1` in order to be able to access the `man` page after the installation.
+This fork adds a install script that can be used to install `yadm` and then clone your dotfiles from a remote repo. No `root` needed, the install script should be easy to verify as safe, and there is a confirmation prompt before anything that could cause problems. The only requirements are `bash`, `git` and `curl` or `wget`.
 
-    # Default installation creates a yadm directory in the current path
+A symbolic link to [`yadm`](yadm) will be created in `~/bin` if it exists, or in `~/.local/bin` otherwise, as well as a symbolic link to [`yadm.1`](yadm.md) file will be created in `~/.local/share/man/man1` in order to be able to access the `man` page after the installation.
+
+    # Default installation using curl creates a yadm directory in the current path
     bash <(curl -fsSL https://git.envs.net/lfdev/yadm-install/raw/branch/master/install.sh)
+    # or using wget
+    bash <(wget -qO- https://git.envs.net/lfdev/yadm-install/raw/branch/master/install.sh)
 
-    # Default installation using the shortened URL (if wanted, verify the URL contents first using curl or a browser)
+    # Default installation using the shortened URL
+    # (if in doubt, verify the URL contents first using curl/wget or a browser)
     bash <(curl -fsSL https://envs.sh/Q_C)
+    # or
+    bash <(wget -qO- https://envs.sh/Q_C)
 
     # Installation using the shortened URL and a custom path (full URL also supports a custom path)
     bash <(curl -fsSL https://envs.sh/Q_C) /path/to/install  # installs to /path/to/install/yadm
     bash <(curl -fsSL https://envs.sh/Q_C) relative/path     # installs to $PWD/relative/path/yadm
+    # or
+    bash <(wget -qO- https://envs.sh/Q_C) /path/to/install
+    bash <(wget -qO- https://envs.sh/Q_C) relative/path
 
 Of course, it is possible to download [`install.sh`](install.sh) or the source code, and then run the script locally. In this case, one may also change `CLONE_URL` inside the script to point to the [upstream repo][] if desired. It is also possible to change the repo origin to upstream after the installation and pull future updates from it instead (it will detele the installation script tho):
 
