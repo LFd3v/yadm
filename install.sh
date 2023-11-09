@@ -81,3 +81,7 @@ confirm_prompt "Do you want to clone your dotfiles repo now"
 printf "Please type the HTTPS or SSH repo address and press ENTER:\n"
 read -p "> " dot_repo
 [ ! -z "$dot_repo" ] && "${CLONE_DIR}"/yadm clone "${dot_repo}" || true
+
+printf "\n"
+printf "You may want to logout or source ${SHELL##*/} profile to apply any changes.\n"
+printf "Done."
