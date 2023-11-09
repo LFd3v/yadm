@@ -28,11 +28,16 @@ confirm_prompt() {
 }
 
 transform_path() {
-  if [[ "$1" == "/"* ]]; then
-    printf "${1}/yadm"
-  else
-    printf "${CURRENT_DIR}/${1}/yadm"
-  fi
+    if [[ "${CURRENT_DIR}" == "/" && "$1" == "" ]]; then
+        printf "ERROR: \"yadm\" cannot be installed to the root directoty\!\n"
+        printf "       Please change directoty first or provide a destination path.\n"
+        exit 1
+    fi
+    if [[ "$1" == "/"* ]]; then
+        printf "${1}/yadm"
+    else
+        printf "${CURRENT_DIR}/${1}/yadm"
+    fi
 }
 
 if ! is_app_installed git; then
