@@ -27,6 +27,31 @@
 Complete features, usage, examples and installation instructions can be found on
 the [yadm.io][website-link] website.
 
+## Install script
+
+`yadm` is great, it works very well to manage dotfiles, but the initial setup on a new machine is somewhat cumbersome.
+
+This fork adds a install script that can be used to install `yadm` and then clone your dotfiles from a remote repo. No `root` needed, the install script should be easy to verify as safe, and there is a confirmation prompt before anything that could cause problems. The only requirements are `bash`, `git` and `curl`. A symbolic link to [`yadm`](yadm) will be created in `~/bin` if it exists, or in `~/.local/bin` otherwise, as well as a symbolic link to [`yadm.1`](yadm.md) file will be created in `~/.local/share/man/man1` in order to be able to access the `man` page after the installation.
+
+    # Default installation to yadm in the current directory
+    bash <(curl -sSL https://git.envs.net/lfdev/yadm-install/raw/branch/master/install.sh)
+
+    # Default installation using the shortened URL (open it first to verify it is the same as above,if wanted)
+    bash <(curl -sSL https://envs.sh/Q_C)
+
+    # Installation using the shortened URL to a custom path (this also works with the full URL)
+    bash <(curl -sSL https://envs.sh/Q_C) /path/to/install  # installs to /path/to/install/yadm
+    bash <(curl -sSL https://envs.sh/Q_C) relative/path     # installs to $PWD/relative/path/yadm
+
+Of course, it is possible to download [`install.sh`](install.sh) (or the source code) and then run the script locally. In this case, one may also change `CLONE_URL` inside the script to point to the [upstream repo][] if desired. It is also possible to change the repo origin to upstream after the installation and pull future updates from it instead:
+
+    cd /path/to/yadm                                        # enter repo directory
+    git remote set-url origin https://github.com/TheLocehiliosan/yadm.git
+    git pull origin master --rebase
+    git pull origin master                                  # or simply git pull for future updates
+
+I plan to keep this repo up-to-date with upstream whenever there is a new `yadm` release.
+
 ## A very quick tour
 
     # Initialize a new repository
@@ -56,8 +81,8 @@ The star count helps others discover yadm.
 [Git]: https://git-scm.com/
 [GnuPG]: https://gnupg.org/
 [OpenSSL]: https://www.openssl.org/
-[arch-badge]: https://img.shields.io/archlinux/v/community/any/yadm
-[arch-link]: https://archlinux.org/packages/community/any/yadm/
+[arch-badge]: https://img.shields.io/archlinux/v/extra/any/yadm
+[arch-link]: https://archlinux.org/packages/extra/any/yadm/
 [dev-pages-badge]: https://img.shields.io/github/actions/workflow/status/TheLocehiliosan/yadm/test.yml?branch=dev-pages
 [develop-badge]: https://img.shields.io/github/actions/workflow/status/TheLocehiliosan/yadm/test.yml?branch=develop
 [develop-commits]: https://github.com/TheLocehiliosan/yadm/commits/develop
@@ -76,6 +101,7 @@ The star count helps others discover yadm.
 [obs-link]: https://software.opensuse.org//download.html?project=home%3ATheLocehiliosan%3Ayadm&package=yadm
 [releases-badge]: https://img.shields.io/github/tag/TheLocehiliosan/yadm.svg?label=latest+release
 [releases-link]: https://github.com/TheLocehiliosan/yadm/releases
+[upstream repo]: https://github.com/TheLocehiliosan/yadm.git
 [transcrypt]: https://github.com/elasticdog/transcrypt
 [travis-ci]: https://travis-ci.com/TheLocehiliosan/yadm/branches
 [website-commits]: https://github.com/TheLocehiliosan/yadm/commits/gh-pages
