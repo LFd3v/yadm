@@ -28,11 +28,6 @@ confirm_prompt() {
 }
 
 transform_path() {
-    if [[ "${CURRENT_DIR}" == "/" && "$1" == "/" ]]; then
-        printf "ERROR: \"yadm\" cannot be installed to the root directoty\!\n"
-        printf "       Please change directoty first or provide a destination path.\n"
-        exit 1
-    fi
     if [[ "$1" == "/"* ]]; then
         printf "${1}/yadm"
     else
@@ -47,6 +42,12 @@ if ! is_app_installed git; then
 fi
 
 CLONE_DIR="$(transform_path ${CLONE_DIR})"
+
+if [[ "${CLONE_DIR}" == "//yadm" ]]; then
+    printf "ERROR: \"yadm\" cannot be installed to the root directoty\!\n"
+    printf "       Please change directoty first or provide a destination path.\n"
+    exit 1
+fi
 
 if [ -e "${CLONE_DIR}" ]; then
     printf "${CLONE_DIR} exists, it will cause an error if not empty.\n"
