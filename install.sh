@@ -36,7 +36,7 @@ transform_path() {
 }
 
 if ! is_app_installed git; then
-    printf "ERROR: \"git\" not found\!\n"
+    printf "ERROR: \"git\" not found.\n"
     printf "       Please install it first.\n"
     exit 1
 fi
@@ -44,7 +44,7 @@ fi
 CLONE_DIR="$(transform_path ${CLONE_DIR})"
 
 if [[ "${CLONE_DIR}" == "//yadm" ]]; then
-    printf "ERROR: \"yadm\" cannot be installed to the root directoty\!\n"
+    printf "ERROR: \"yadm\" cannot be installed to the root directoty.\n"
     printf "       Please change directoty first or provide a destination path.\n"
     exit 1
 fi
@@ -78,6 +78,6 @@ printf "Make sure it is in the \$PATH.\n"
 printf "\n"
 
 confirm_prompt "Do you want to clone your dotfiles repo now"
-printf "Please type your dotfiles repo address and press ENTER:\n"
+printf "Please type the HTTPS or SSH repo address and press ENTER:\n"
 read -p "> " dot_repo
 [ ! -z "$dot_repo" ] && "${CLONE_DIR}"/yadm clone "${dot_repo}" || true
