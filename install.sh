@@ -51,7 +51,7 @@ else
 fi
 
 confirm_prompt "Continue"
-[ "${CREATE_DIR}" ] && mkdir -p "${CLONE_DIR}"
+[ "${CREATE_DIR}" ] && mkdir -p "${CLONE_DIR}" || true
 
 git clone --single-branch --branch master --depth=1 "${CLONE_URL}" "${CLONE_DIR}"
 
@@ -62,15 +62,16 @@ if [ ! -e "${BIN_DIR}" ]; then
     CREATE_DIR=true
 fi
 
-[ "${CREATE_DIR}" ] && mkdir -p "${BIN_DIR}"
+[ "${CREATE_DIR}" ] && mkdir -p "${BIN_DIR}" || true
 ln -sf "${CLONE_DIR}/yadm" "${BIN_DIR}/"
 mkdir -p "${MAN_DIR}" && ln -sf "${CLONE_DIR}/yadm.1" "${MAN_DIR}/"
 
+printf "\n"
 printf "yadm executable was simlinked to ${BIN_DIR}\n"
 printf "Make sure it is in the \$PATH.\n"
+printf "\n"
 
 confirm_prompt "Do you want to clone your dotfiles repo now"
-
 printf "Please type your dotfiles repo address and press ENTER:\n"
 read -p "> " dot_repo
-[ ! -z "$dot_repo" ] && "${CLONE_DIR}"/yadm clone "${dot_repo}"
+[ ! -z "$dot_repo" ] && "${CLONE_DIR}"/yadm clone "${dot_repo}" || true
