@@ -84,4 +84,5 @@ read -p "> " dot_repo
 
 printf "\n"
 printf "You may want to logout or source ${SHELL##*/} profile to apply any changes.\n"
-printf "Done."
+printf "Done.\n"
+printf "\n"
