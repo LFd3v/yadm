@@ -5,6 +5,7 @@ set -u
 set -o pipefail
 
 CURRENT_DIR="$(pwd -P)"
+CLONE_URL="https://git.envs.net/lfdev/yadm-install.git"
 CLONE_DIR="${1:-${CURRENT_DIR}}"
 BIN_DIR="${HOME}/bin"
 MAN_DIR="${HOME}/.local/share/man/man1"
@@ -52,9 +53,9 @@ fi
 confirm_prompt "Continue"
 [ "${CREATE_DIR}" ] && mkdir -p "${CLONE_DIR}"
 
-git clone --depth=1 https://git.envs.net/lfdev/yadm-install.git "${CLONE_DIR}"
+git clone --single-branch --branch master --depth=1 "${CLONE_URL}" "${CLONE_DIR}"
 
-CREATE_DEST=false
+CREATE_DIR=false
 
 if [ ! -e "${BIN_DIR}" ]; then
     BIN_DIR="${HOME}/.local/bin"
