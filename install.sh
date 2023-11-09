@@ -28,7 +28,7 @@ confirm_prompt() {
 }
 
 transform_path() {
-    if [[ "${CURRENT_DIR}" == "/" && "$1" == "" ]]; then
+    if [[ "${CURRENT_DIR}" == "/" && "$1" == "/" ]]; then
         printf "ERROR: \"yadm\" cannot be installed to the root directoty\!\n"
         printf "       Please change directoty first or provide a destination path.\n"
         exit 1
